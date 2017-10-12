@@ -2,7 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>toBase64</title>
     <style>
@@ -16,6 +19,14 @@
             color: #20a0ff;
             text-align: center;
         }
+        h1 span {
+            color: #13CE66;
+            cursor: pointer;
+            margin: 0 5px
+        }
+        input {
+            display: none
+        }
         p{
             word-break: break-all;
             border-top: 2px dashed #20a0ff;
@@ -24,26 +35,47 @@
     </style>
 </head>
 <body>
-    <h1>拖入图片开始转换</h1>
+    <h1>拖入图片开始转换，或<span id="button">打开本地文件<input id="file" type="file"></span></h1>
     <div id="area"></div>
 </body>
 <script>
+    var button = document.all.button;
+    var input = document.all.file;
+    var area = document.all.area;
+    
+    // drag
     window.addEventListener("dragenter", function(event) { event.preventDefault(); }, false);
     window.addEventListener("dragover", function(event) { event.preventDefault(); }, false);
     window.addEventListener("drop", function(event) {
+        event.preventDefault();        
+        var file = event.dataTransfer.files[0]        
+        makeReader(file)
+    }, false);
+
+    // click
+    button.addEventListener('click', function() {
+        input.click()
+    })
+    input.addEventListener('change', function(event) {
+        var file = event.target.files[0];
+        makeReader(file)
+    })
+
+    function makeReader(file) {
         var reader = new FileReader();
-        var file = event.dataTransfer.files[0]
         reader.onload = function(e) {
-            var str = chunk(file.name,
-                            file.lastModified,
-                            file.size,
-                            file.type,
-                            e.target.result)
-            document.all.area.insertAdjacentHTML("afterBegin", str);
+            var str = chunk(
+                file.name,
+                file.lastModified,
+                file.size,
+                file.type,
+                e.target.result
+            )
+            area.insertAdjacentHTML("afterBegin", str);
         };
         reader.readAsDataURL(file);
-        event.preventDefault();
-    }, false);
+    }
+    
     function chunk(name, lastModified, size, type, result) {
         return '<h5>名称: ' + name  + '</h5>' +
                '<h5>类型: ' + type  + '</h5>' +
