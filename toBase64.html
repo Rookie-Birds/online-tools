@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>toBase64</title>
+    <style>
+        body{
+            padding: 50px;
+            margin: 0;
+            height: 100%
+        }
+        h1{
+            margin: 0 auto;
+            color: #20a0ff;
+            text-align: center;
+        }
+        p{
+            word-break: break-all;
+            border-top: 2px dashed #20a0ff;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>拖入图片开始转换</h1>
+    <div id="area"></div>
+</body>
+<script>
+    window.addEventListener("dragenter", function(event) { event.preventDefault(); }, false);
+    window.addEventListener("dragover", function(event) { event.preventDefault(); }, false);
+    window.addEventListener("drop", function(event) {
+        var reader = new FileReader();
+        var file = event.dataTransfer.files[0]
+        reader.onload = function(e) {
+            var str = chunk(file.name,
+                            file.lastModified,
+                            file.size,
+                            file.type,
+                            e.target.result)
+            document.all.area.insertAdjacentHTML("afterBegin", str);
+        };
+        reader.readAsDataURL(file);
+        event.preventDefault();
+    }, false);
+    function chunk(name, lastModified, size, type, result) {
+        return '<h5>名称: ' + name  + '</h5>' +
+               '<h5>类型: ' + type  + '</h5>' +
+               '<h5>大小: ' + size  + 'K</h5>' +
+               '<h5>最后修改: ' + new Date(lastModified) + '</h5>' +
+               '<p>' + result + '</p>'
+    }
+</script>
+</html>

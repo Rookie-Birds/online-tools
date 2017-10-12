@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>torrent-live-play</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        html, body {
+            height: 100%;
+        }
+        input {
+            display: block;
+            height: 25px;
+            width: 60%;
+            padding-left: 5px;
+            border: 1px solid rgb(195, 194, 194);
+            border-radius: 5px;
+        }
+        input:hover {
+            border: 1px solid gray
+        }
+        input:focus {
+            outline: 1px solid #20a0ff;
+            border: 1px solid #20a0ff
+        }
+        section {
+            box-sizing: border-box;
+            width: 100%;
+            height: 144px;
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+            border: 3px solid #20a0ff
+        }
+        section > div {
+            width: 40%
+        }
+        button:focus {
+            outline: none
+        }
+        button:hover {
+            opacity: 0.7
+        }
+        .button-box {
+            display: flex;
+            justify-content: center;
+            align-items: center
+        }
+        .button-box > button {
+            cursor: pointer;
+            width: 100px;
+            text-align: center;
+            height: 40px;
+            line-height: 40px;
+            color: #fff;
+            background: #20a0ff;
+            border: none;
+            border-radius: 5px;
+        }
+        .button-box > button:active {
+            background: #0e87d7
+        }
+        main {
+            box-sizing: border-box;
+            width: 100%;
+            min-height: calc(100% - 144px);
+            border: 3px solid #13CE66;
+            border-bottom:none;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        h1 {
+            letter-spacing: -1px;
+            line-height: 60px;
+            font-size: 60px;
+            font-weight: 100;
+            margin: 0px 0 50px 0;
+            text-shadow: 0 1px 0 #fff;
+            text-align: center
+        }
+        p {
+            font-size: 13px;
+            height: 13px;
+            line-height: 13px;
+            text-align: center;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/webtorrent-element@latest/dist/webtorrent-element.js"></script>
+</head>
+<body>
+    <main id="playGround">
+        
+    </main>
+    <section>
+        <div class="form">
+            <div class="formItem">
+               <label>URL:</label>
+               <input id="url" type="text" placeHolder="种子地址">
+            </div>
+            <div class="formItem">
+                <label>Filename:</label>
+                <input id="filename" type="text" placeHolder="种子中要播放的文件名称">
+            </div>
+        </div>
+        <div class="button-box">
+            <button id="play">PLAY</button>
+        </div>
+    </section>
+</body>
+<script>
+    var ua = navigator.userAgent;
+    if (/mobile/i.test(ua)) {
+        alert('建议在电脑上使用！');
+    }
+    if (!/chrome/i.test(ua)) {
+        alert('请使用Chrome浏览器！');
+    }
+
+    var exampleUrl = 'magnet:?xt=urn:btih:08ada5a7a6183aae1e09d831df6748d566095a10&dn=Sintel&tr=wss%3A%2F%2Ftracker.btorrent.xyz&tr=wss%3A%2F%2Ftracker.fastcast.nz&tr=wss%3A%2F%2Ftracker.openwebtorrent.com&ws=https%3A%2F%2Fwebtorrent.io%2Ftorrents%2F&xs=https%3A%2F%2Fwebtorrent.io%2Ftorrents%2Fsintel.torrent';
+    var exampleFilename = 'Sintel.mp4';
+    var title = '<h1>PlayGround</h1><p>种子是否可以播放取决于您的网速、种子提供方连接畅通性和URL的正确性等方面。【此页面仅用于web技术学习和交流】</p>'
+
+    window.addEventListener('DOMContentLoaded', init)
+    
+    function init() {
+        var play = document.all.play;
+        var playGround = document.all.playGround;
+        var url = document.all.url;
+        var filename = document.all.filename;
+        
+        playGround.innerHTML = title;
+        url.value = exampleUrl;
+        filename.value = exampleFilename;
+
+        play.onclick = fetchRecourse;
+
+        function fetchRecourse () {
+            if (url.value.trim() === '') {
+                alert('请输入正确的url地址！')
+            } else if (filename.value.trim() === '') {
+                alert('请输入种子中要播放的文件名称！')
+            }
+            playGround.innerHTML = '';
+            setTimeout(function () {
+                var el = document.createElement('web-torrent');
+                el.src = url.value;
+                el.file = filename.value;
+                playGround.appendChild(el);
+            }, 500)
+        }
+    }
+</script>
+</html>

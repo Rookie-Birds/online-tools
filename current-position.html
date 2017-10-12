@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+  />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <title>当前位置</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0
+    }
+
+    ul,
+    li {
+      list-style: none
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%
+    }
+
+    .container {
+      width: 100%;
+      height: 100%;
+      display: -webkit-flex;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container>nav {
+      margin-bottom: 30px;
+      color: #03A9F4;
+      font-size: 30px;
+    }
+
+    .container>ul {
+      width: 61.8%;
+      border: 1px solid #03A9F4;
+      border-radius: 10px
+    }
+
+    .container>ul>li {
+      display: -webkit-flex;
+      display: flex;
+      border-bottom: 1px solid #03A9F4
+    }
+
+    .container>ul>li:last-child {
+      border: none
+    }
+
+    .container>ul>li>span {
+      width: 50%;
+      text-align: center;
+    }
+
+    .container>ul>li>span:last-child {
+      border-left: 1px solid #03A9F4
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <nav>我的位置</nav>
+    <ul class="list">
+      <li>
+        <span>位置精度</span>
+        <span class="accuracy">定位中...</span>
+      </li>
+      <li>
+        <span>经度</span>
+        <span class="longitude">定位中...</span>
+      </li>
+      <li>
+        <span>维度</span>
+        <span class="latitude">定位中...</span>
+      </li>
+      <li>
+        <span>海拔精度</span>
+        <span class="altitudeAccuracy">定位中...</span>
+      </li>
+      <li>
+        <span>海拔</span>
+        <span class="altitude">定位中...</span>
+      </li>
+      <li>
+        <span>方向</span>
+        <span class="heading">定位中...</span>
+      </li>
+      <li>
+        <span>速度</span>
+        <span class="speed">定位中...</span>
+      </li>
+    </ul>
+  </div>
+</body>
+<script>
+  var showSucccess = function (e) {
+    console.log(e);
+    ['accuracy', 'longitude', 'latitude', 'altitudeAccuracy', 'altitude', 'heading', 'speed'].forEach(function (item) {
+      document.querySelector('.' + item).innerHTML = e.coords[item] || '无'
+    })
+  }
+  var showError = function (error) {
+    switch (error.code) {
+      case error.PERMISSION_DENIED:
+        alert('拒绝了地理位置请求')
+        break;
+      case error.POSITION_UNAVAILABLE:
+        alert('位置信息不可用')
+        break;
+      case error.TIMEOUT:
+        alert('请求超时')
+        break;
+      case error.UNKNOWN_ERROR:
+        alert('出现未知错误')
+        break;
+    }
+  }
+  navigator.geolocation.watchPosition(showSucccess, showError, {
+    enableHighAccuracy: true,
+    timeout: 15000,
+    maximumAge: 5000
+  })
+
+  /*@README
+  ### 地理位置对象
+  - API:navigator.geolocation
+    - getCurrentPosition(成功的回调,失败的回调,配置对象):获取位置
+    - watchPosition(同上):持续监听位置变化；返回监听ID
+    - clearWatch(ID):清除位置监听
+  - 配置对象：
+
+  key | value
+  ---|---
+  enableHighAccuracy | 是否使用高精度
+  timeout | 是设定地理位置获取的超时时间
+  maximumAge | 表示允许设备从缓存中读取位置，缓存的过期时间，单位是毫秒，设为0来禁用缓存读取。如果返回的是缓存中的时间，会在timestamp中反映出来。
+
+
+  - 位置对象：
+
+  key | value
+  ---|---
+  coords | 返回当前位置的坐标对象
+  timestamp | 不确定是什么时间new Date(1511006281624) 1986年左右
+
+  - 坐标对象:
+
+  key | value
+  ---|---
+  accuracy | 返回用米表示的坐标精度
+  longitude | 返回用十进制表示的经度
+  latitude | 返回用十进制表示的纬度
+  altitudeAccuracy | 返回用米表示的海拔精度
+  altitude | 返回用米表示的海拔高度
+  heading | 方向，从正北开始以度计
+  speed | 返回用米/秒表示的行进速度
+  */
+</script>
+
+</html>
