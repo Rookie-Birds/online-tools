@@ -18,7 +18,7 @@ HTML和Canvas的下拉加载、动态回弹
 ### [share](https://github.com/overtrue/share.js)
 一键分享到微博、QQ空间、QQ好友、微信、腾讯微博、豆瓣、Facebook、Twitter、Linkedin、Google+、点点等
 
-### [swoper](https://github.com/nolimits4web/Swiper)
+### [swiper](https://github.com/nolimits4web/Swiper)
 动态滑动、触摸的模块，适宜banner图
 
 ### [vue-swipe](https://github.com/ElemeFE/vue-swipe)
