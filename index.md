@@ -9,3 +9,6 @@
 
 ### 种子在线播放
 [点击进入](https://rookie-birds.github.io/online-tools/torrent-live-play.html)
+
+### 前端开发工具
+[点击进入](https://rookie-birds.github.io/online-tools/recommend-dev.md)
