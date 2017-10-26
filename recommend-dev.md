@@ -46,10 +46,10 @@ XML文本与Javascript对象/JSON文本之间的转换器实用程序。
 在现代浏览器中将文本复制到剪贴板【轻量级】（0.2 kB）
 
 ### [clipboard](https://github.com/zenorocha/clipboard.js)
-在现代浏览器中将文本复制到剪贴板【推荐】
+在现代浏览器中将文本复制到剪贴板【推荐】
 
 ### [v-copy](https://github.com/egoist/v-copy)
-用于拷贝到剪切板的vue指令，基于copy-text-to-clipboard
+用于拷贝到剪切板的vue指令，基于copy-text-to-clipboard
 
 ### [history](https://github.com/ReactTraining/history)
 HTML5的会话历史管理库
@@ -136,7 +136,7 @@ HTML5的翻书插件，依赖jQuery
 界面平滑滚动的javascript库
 
 ### [fabric](https://github.com/kangax/fabric.js)
-一个强大的canvas操作库
+一个强大的canvas操作库
 
 ### [mint-ui](https://github.com/ElemeFE/mint-ui)
 移动端vue组件库
@@ -148,13 +148,13 @@ HTML5的翻书插件，依赖jQuery
 Sortable的vue版本
 
 ### [qs](https://github.com/ljharb/qs)
-查询参数（querystring）解析库
+查询参数（querystring）解析库
 
 ### [Cookies](https://github.com/ScottHamper/Cookies)
 浏览器cookie管理库
 
 ### [axios](https://github.com/axios/axios)
-用于浏览器和node.js的基于Promise的HTTP客户端
+用于浏览器和node.js的基于Promise的HTTP客户端
 
 ### [store](https://github.com/nbubna/store)
 浏览器本地存储管理库（localStorage、sessionStorage）
@@ -166,7 +166,7 @@ Sortable的vue版本
 javascript动画库
 
 ### [math](https://github.com/josdejong/mathjs)
-javascript的数学计算库【未处理精度问题】
+javascript的数学计算库【未处理精度问题】
 
 ### [decaimal](https://github.com/MikeMcl/decimal.js)
 解决javacript数字计算精度的失真问题
