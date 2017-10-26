@@ -11,4 +11,4 @@
 [点击进入](https://rookie-birds.github.io/online-tools/torrent-live-play.html)
 
 ### 前端开发工具
-[点击进入](https://rookie-birds.github.io/online-tools/recommend-dev.md)
+[点击进入](https://github.com/Rookie-Birds/online-tools/blob/master/recommend-dev.md)
